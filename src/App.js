@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import SentenceScrambler from './components/SentenceScrambler'
 import AppBar from '@material-ui/core/AppBar'
@@ -14,9 +13,6 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.classes = props;
-    this.propTypes = {
-      classes: PropTypes.object.isRequired,
-    };
   }
 
   styles = theme => ({
