@@ -1,5 +1,11 @@
 export default class SentenceScramblerUtil {
 
+  canScramble(aSentence) {
+    let sanitizedInputString = this.sanitizeInput(aSentence)
+    let words = sanitizedInputString.split(" ");
+    return words.length > 1;
+  }
+
   scrambleSentence(aSentence) {
     let sanitizedInputString = this.sanitizeInput(aSentence)
     let words = sanitizedInputString.split(" ");
