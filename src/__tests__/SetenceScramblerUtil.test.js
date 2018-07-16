@@ -32,16 +32,18 @@ describe("SentenceScramblerUtil", () => {
     });
   });
   describe("scrambleSentence", () => {
-    describe("when no options are set", () => {
-      let scrambleFunction = null;
-      beforeEach(() => {
-        scrambleFunction = anArrayOfWords => {
-          return anArrayOfWords.reverse();
-        };
-        util = new SentenceScramblerUtil(scrambleFunction);
+    let scrambleFunction = null;
+    beforeEach(() => {
+      scrambleFunction = anArrayOfWords => {
+        return anArrayOfWords.reverse();
+      };
+      util = new SentenceScramblerUtil({
+        aScramblerFunction: scrambleFunction
       });
+    });
 
-      test("remove first capitilsation", () => {
+    describe("when no options are set", () => {
+      test("remove first capitilisation", () => {
         expect(util.scrambleSentence("This is a sentence")).toEqual([
           "sentence",
           "a",
@@ -49,10 +51,20 @@ describe("SentenceScramblerUtil", () => {
           "this"
         ]);
       });
-      test("preserve capitilsation of I", () => {
+      test("preserve capitilisation of I", () => {
         expect(
           util.scrambleSentence("I know I should preserve capitals")
         ).toEqual(["capitals", "preserve", "should", "I", "know", "I"]);
+      });
+      test("preserve capitilisation of Mrs and Mr", () => {
+        expect(util.scrambleSentence("Mrs and Mr Jones live here")).toEqual([
+          "here",
+          "live",
+          "Jones",
+          "Mr",
+          "and",
+          "Mrs"
+        ]);
       });
       test("keep commas joined", () => {
         expect(
@@ -73,6 +85,70 @@ describe("SentenceScramblerUtil", () => {
           util.scrambleSentence("Sentences end with a full stop.")
         ).toEqual(["stop.", "full", "a", "with", "end", "sentences"]);
       });
+      test("question marks are preserved", () => {
+        expect(
+          util.scrambleSentence("May sentences end with a question mark?")
+        ).toEqual([
+          "mark?",
+          "question",
+          "a",
+          "with",
+          "end",
+          "sentences",
+          "may"
+        ]);
+      });
+    });
+    describe("when option is set to strip full stops", () => {
+      beforeEach(() => {
+        util = new SentenceScramblerUtil({
+          aScramblerFunction: scrambleFunction,
+          shouldStripFullStops: true
+        });
+      });
+      test("Check that full stop is removed", () => {
+        expect(util.scrambleSentence("I had a full stop.")).toEqual([
+          "stop",
+          "full",
+          "a",
+          "had",
+          "I"
+        ]);
+      });
+      test("Check that full stop isn't removed from Mr.", () => {
+        expect(util.scrambleSentence("Mr. Smith has arrived")).toEqual([
+          "arrived",
+          "has",
+          "Smith",
+          "Mr."
+        ]);
+      });
+    });
+
+    test("remove first capitilisation", () => {
+      expect(util.scrambleSentence("This is a sentence")).toEqual([
+        "sentence",
+        "a",
+        "is",
+        "this"
+      ]);
+    });
+    describe("when option is set to tokenize question marks", () => {
+      beforeEach(() => {
+        util = new SentenceScramblerUtil({
+          aScramblerFunction: scrambleFunction,
+          shouldTokenizeQuestionMarks: true
+        });
+      });
+      test("Check that question mark is removed", () => {
+        expect(util.scrambleSentence("Should this be separate?")).toEqual([
+          "?",
+          "separate",
+          "be",
+          "this",
+          "should"
+        ]);
+      });
     });
   });
   describe("maybeLowercaseAWord", () => {
@@ -91,5 +167,4 @@ describe("SentenceScramblerUtil", () => {
       );
     });
   });
-  describe("sanitizeInput", () => {});
 });

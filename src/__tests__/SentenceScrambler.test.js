@@ -8,7 +8,7 @@ import Adapter from "enzyme-adapter-react-16";
 configure({ adapter: new Adapter() });
 
 describe("SentenceScrambler methods", () => {
-  test("SentenceScrambler has TextInput", () => {
+  test("SentenceScrambler can not rescramble with no input", () => {
     // const component =
     let shallow = createShallow();
     const scrambler = shallow(<SentenceScrambler />);

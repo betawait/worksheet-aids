@@ -1,10 +1,17 @@
 export default class SentenceScramblerUtil {
-  constructor(aScramblerFunction) {
+  constructor({
+    aScramblerFunction = null,
+    shouldTokenizeQuestionMarks = false,
+    shouldStripFullStops = false
+  } = {}) {
     if (aScramblerFunction) {
       this.shuffleArray = aScramblerFunction;
     } else {
       this.shuffleArray = this.defaultScramblerFunction;
     }
+
+    this.shouldTokenizeQuestionMarks = shouldTokenizeQuestionMarks;
+    this.shouldStripFullStops = shouldStripFullStops;
   }
 
   canScramble(aSentence) {
@@ -14,10 +21,15 @@ export default class SentenceScramblerUtil {
   }
 
   scrambleSentence(aSentence) {
-    let sanitizedInputString = this.sanitizeInput(aSentence);
-    let words = sanitizedInputString.split(" ");
+    let words = this.tokenizeWords(aSentence);
+    words = this.maybeLowercaseWordsInArray(words);
     this.shuffleArray(words);
-    return this.maybeLowercaseWordsInArray(words);
+    return words;
+  }
+
+  tokenizeWords(aSentence) {
+    let sanitizedInputString = this.sanitizeInput(aSentence);
+    return sanitizedInputString.split(" ");
   }
 
   //from comments on https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/25984542
@@ -29,27 +41,25 @@ export default class SentenceScramblerUtil {
   }
 
   maybeLowercaseWordsInArray(array) {
-    return array.map(aWord => this.maybeLowercaseAWord(aWord));
+    return array.map((aWord, index) => {
+      if (index === 0) {
+        return this.maybeLowercaseAWord(aWord);
+      } else {
+        return aWord;
+      }
+    });
   }
 
   maybeLowercaseAWord(aWord) {
     if (aWord.length > 1) {
       if (this.countUppercaseLetters(aWord) > 1) return aWord;
+      if (this.shouldRetainCapitalisation(aWord)) return aWord;
       return aWord.toLowerCase();
     } else if (aWord.length === 1 && aWord !== "I") {
       return aWord.toLowerCase();
     } else {
       return aWord;
     }
-  }
-
-  doesStringContainAnyLowercaseLetters(aString) {
-    for (const aChar of aString) {
-      if (aChar.toUpperCase() !== aChar) {
-        return true;
-      }
-    }
-    return false;
   }
 
   countUppercaseLetters(aString) {
@@ -63,7 +73,19 @@ export default class SentenceScramblerUtil {
     return numUppercaseLetters;
   }
 
+  shouldRetainCapitalisation(aString) {
+    const exceptions = ["I", "Mr", "Mrs", "Mrs.", "Mr.", "Dr.", "Dr", "Doctor"];
+    return exceptions.indexOf(aString) !== -1;
+  }
+
   sanitizeInput(inputString) {
-    return inputString.trim(); //.replace("?","").replace(".","")
+    let sanitizedInput = inputString.trim();
+    if (this.shouldStripFullStops) {
+      sanitizedInput = sanitizedInput.replace(/\.$/, "");
+    }
+    if (this.shouldTokenizeQuestionMarks) {
+      sanitizedInput = sanitizedInput.replace(/(\w)(\?)/, "$1 ?");
+    }
+    return sanitizedInput; //.replace("?","").replace(".","")
   }
 }
