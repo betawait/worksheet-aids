@@ -150,6 +150,19 @@ describe("SentenceScramblerUtil", () => {
         ]);
       });
     });
+    describe("when option is set to use explicit separators", () => {
+      beforeEach(() => {
+        util = new SentenceScramblerUtil({
+          aScramblerFunction: scrambleFunction,
+          shouldUseExplicitSeparators: true
+        });
+      });
+      test("Check that question mark is removed", () => {
+        expect(
+          util.scrambleSentence("This sentence will use / slashes to separate")
+        ).toEqual(["slashes to separate", "this sentence will use"]);
+      });
+    });
   });
   describe("maybeLowercaseAWord", () => {
     test("Lowercase a word with a leading capital", () => {

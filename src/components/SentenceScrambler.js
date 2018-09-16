@@ -21,7 +21,8 @@ class SentenceScrambler extends Component {
       canScramble: false,
       options: {
         shouldTokenizeQuestionMarks: false,
-        shouldStripFullStops: false
+        shouldStripFullStops: false,
+        shouldUseExplicitSeparators: false
       }
     };
 

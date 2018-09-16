@@ -23,6 +23,7 @@ class ScramblerOptions extends Component {
                 checked={this.props.options["shouldTokenizeQuestionMarks"]}
                 onChange={this.handleChange("shouldTokenizeQuestionMarks")}
                 value="shouldTokenizeQuestionMarks"
+                disabled={this.props.options["shouldUseExplicitSeparators"]}
               />
             }
             label="Make question mark a separate word"
@@ -33,9 +34,20 @@ class ScramblerOptions extends Component {
                 checked={this.props.options["shouldStripFullStops"]}
                 onChange={this.handleChange("shouldStripFullStops")}
                 value="shouldStripFullStops"
+                disabled={this.props.options["shouldUseExplicitSeparators"]}
               />
             }
             label="Should Strip Full Stops"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.props.options["shouldUseExplicitSeparators"]}
+                onChange={this.handleChange("shouldUseExplicitSeparators")}
+                value="shouldUseExplicitSeparators"
+              />
+            }
+            label="Should use &quot;/&quot; as Separator"
           />
         </FormGroup>
       </FormControl>
