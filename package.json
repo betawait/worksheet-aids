@@ -9,7 +9,7 @@
     "react": "^16.4.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.0",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.5"
   },
   "homepage": "https://betawait.github.io/worksheet-aids",
   "scripts": {
