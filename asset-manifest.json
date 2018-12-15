@@ -1,6 +1,13 @@
 {
-  "main.css": "static/css/main.65027555.css",
-  "main.css.map": "static/css/main.65027555.css.map",
-  "main.js": "static/js/main.c9008030.js",
-  "main.js.map": "static/js/main.c9008030.js.map"
+  "main.css": "/worksheet-aids/static/css/main.3145af3d.chunk.css",
+  "main.js": "/worksheet-aids/static/js/main.5d016e77.chunk.js",
+  "main.js.map": "/worksheet-aids/static/js/main.5d016e77.chunk.js.map",
+  "static/js/1.b7e68e61.chunk.js": "/worksheet-aids/static/js/1.b7e68e61.chunk.js",
+  "static/js/1.b7e68e61.chunk.js.map": "/worksheet-aids/static/js/1.b7e68e61.chunk.js.map",
+  "runtime~main.js": "/worksheet-aids/static/js/runtime~main.e7c4d303.js",
+  "runtime~main.js.map": "/worksheet-aids/static/js/runtime~main.e7c4d303.js.map",
+  "static/css/main.3145af3d.chunk.css.map": "/worksheet-aids/static/css/main.3145af3d.chunk.css.map",
+  "index.html": "/worksheet-aids/index.html",
+  "precache-manifest.7e9e69f57ad46533e2f6d0dcaa34766f.js": "/worksheet-aids/precache-manifest.7e9e69f57ad46533e2f6d0dcaa34766f.js",
+  "service-worker.js": "/worksheet-aids/service-worker.js"
 }
