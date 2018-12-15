@@ -6,10 +6,9 @@
     "@material-ui/core": "^1.2.0",
     "@material-ui/icons": "^1.1.0",
     "gh-pages": "^1.2.0",
-    "react": "^16.4.0",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.4.0",
-    "react-scripts": "1.1.5"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1"
   },
   "homepage": "https://betawait.github.io/worksheet-aids",
   "scripts": {
@@ -21,13 +20,22 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
-    "babel-jest": "^23.0.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-jest": "^23.6.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^23.1.0",
+    "jest": "^23.6.0",
     "react-test-renderer": "^16.4.1"
   }
 }
